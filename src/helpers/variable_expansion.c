@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:24:29 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/03 13:21:33 by hkanaan          ###   ########.fr       */
+/*   Updated: 2024/07/04 13:00:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,20 @@ static void	get_var(t_env *myenv, char *tofind, t_ll_node **lst)
 		i++;
 	}
 	free(var_and_val);
+}
+
+int	check_if_qoutes(char *s)
+{
+	int					i;
+
+	i = 0;
+	while (s && s[i])
+	{
+		if (s[i] == '\'' || s[i] == '"')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	check_if_solo_dollar(t_ll_node **lst, char *str, int *j)

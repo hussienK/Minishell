@@ -29,6 +29,7 @@ SRC_FILES = 	$(SRC_DIR)main.c \
 				$(EXEC_DIR)execution_2.c \
 				$(EXEC_DIR)execution_helper.c \
 				$(EXEC_DIR)execution_heredoc.c \
+				$(EXEC_DIR)execution_heredoc_helpers.c \
 				$(BUILTIN_DIR)builtins.c \
 				$(BUILTIN_DIR)ft_cd.c \
 				$(BUILTIN_DIR)ft_cd_2.c \

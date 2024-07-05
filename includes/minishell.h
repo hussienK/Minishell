@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:45:13 by hkanaan           #+#    #+#             */
-/*   Updated: 2024/07/04 10:16:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/04 13:18:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,11 @@ void		do_command_helper(t_execution_organiser *org, int *new_fd,
 void		do_command_helper_2(char **cmd, t_env *my_env);
 int			is_builtin_command_fork(char **cmd);
 int			check_var_validity(char *var, char *value);
+
+char		*remove_qoutes_str(char *str, int single_qoute_count,
+				int double_qoute_count, int i);
+void		get_var_heredoc(char *str, t_env *myenv, int *j, int out_f);
+int			check_if_qoutes(char *s);
+int			get_var_start_heredoc(char *str, int *j, int out_f);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 22:24:31 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/03 12:52:06 by hkanaan          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:45:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@ void	clean_quotations(t_ast_node *head, int i, t_env *my_env)
 		return ;
 	while (head->value[i][j])
 	{
-		if (head->value[i][j] == '"')
-			resolve_quotes(&start, head->value[i], &j, my_env);
-		else if (head->value[i][j] == '\'')
-			resolve_literals(&start, head->value[i], &j, my_env);
-		else if (head->value[i][j] == '$')
+		if (head->value[i][j] == '$')
 		{
 			search_and_add_var(&start, head->value[i], &j, my_env);
 		}
+		else if (head->value[i][j] == '"')
+			resolve_quotes(&start, head->value[i], &j, my_env);
+		else if (head->value[i][j] == '\'')
+			resolve_literals(&start, head->value[i], &j, my_env);
 		else
 		{
 			add_to_str(head->value[i][j], &start);
@@ -117,7 +117,7 @@ void	traverse_and_clean_tree(t_ast_node *head, t_env *my_env)
 		traverse_and_clean_tree(head->left, my_env);
 	if (head->right)
 		traverse_and_clean_tree(head->right, my_env);
-	if (head->file_type != DONE)
+	if (head->file_type != DONE && head->file_type != IN_APPEND)
 	{
 		i = 0;
 		while (head->value[i])
