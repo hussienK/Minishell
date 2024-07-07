@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int cd_back(t_env *myenv)
+int	cd_back(t_env *myenv)
 {
-    int		i;
+	int		i;
 	char	*dir;
 
 	i = -1;
@@ -36,11 +36,9 @@ int cd_back(t_env *myenv)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
 		ft_putendl_fd(myenv->env[i], 2);
-		free(dir);
-		return (1);
+		return (free(dir), 1);
 	}
-	free(dir);
-	update_current_pwd(myenv);
+	free(dir), update_current_pwd(myenv, 0);
 	return (0);
 }
 
@@ -49,7 +47,7 @@ void	cd_error_display(char *dir)
 	struct stat	s;
 
 	if (access(dir, F_OK) == 0 && !(!stat(dir, &s)
-		&& s.st_mode & __S_IFDIR))
+			&& s.st_mode & __S_IFDIR))
 	{
 		ft_putstr_fd("cd: cd into file: ", 2);
 		ft_putendl_fd(dir, 2);

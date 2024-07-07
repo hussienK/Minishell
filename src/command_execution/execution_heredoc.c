@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   execution_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:43:43 by hkanaan           #+#    #+#             */
-/*   Updated: 2024/07/04 13:39:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/07 16:45:43 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	check_if_qoutes(char *s)
+{
+	int					i;
+
+	i = 0;
+	while (s && s[i])
+	{
+		if (s[i] == '\'' || s[i] == '"')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	curr_occurs(char *s, char c)
 {
@@ -27,13 +41,14 @@ int	curr_occurs(char *s, char c)
 	args and piping them to parent aslong as there isn't
 	delimiter
 */
-void	here_doc_put_in(char *delim, int out_f, int should_expand, t_env *myenv)
+void	here_doc_put_in(char *delim, int out_f,
+			int should_expand, t_env *myenv)
 {
 	char	*ret;
 	int		j;
 
 	delim = remove_qoutes_str(delim, 0, 0, 0);
-	while (1)
+	while (1 && delim)
 	{
 		j = 0;
 		ret = readline("> ");
@@ -45,16 +60,15 @@ void	here_doc_put_in(char *delim, int out_f, int should_expand, t_env *myenv)
 		if (should_expand)
 		{
 			while (ret[j])
-			{
-				if(get_var_start_heredoc(ret, &j, out_f))
+				if (get_var_start_heredoc(ret, &j, out_f))
 					get_var_heredoc(ret, myenv, &j, out_f);
-			}
-    		ft_putchar_fd('\n', out_f);
+			ft_putchar_fd('\n', out_f);
 		}
 		else
 			ft_putendl_fd(ret, out_f);
 		free(ret);
 	}
+	free(delim);
 }
 
 void	quit_heredoc_helper(int signal_number)

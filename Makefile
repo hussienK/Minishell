@@ -39,6 +39,7 @@ SRC_FILES = 	$(SRC_DIR)main.c \
 				$(BUILTIN_DIR)ft_exit.c \
 				$(BUILTIN_DIR)ft_export.c \
 				$(BUILTIN_DIR)ft_export_utils.c \
+				$(BUILTIN_DIR)ft_sort_printenv.c \
 				$(BUILTIN_DIR)ft_pwd.c \
 				$(BUILTIN_DIR)ft_unset.c \
 

@@ -6,7 +6,7 @@
 /*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:44:56 by hkanaan           #+#    #+#             */
-/*   Updated: 2024/07/02 20:01:19 by hkanaan          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:00:57 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	execution_loop(char *input, t_env *my_env,
 	input = readline("Minishell > ");
 	if (!input)
 		ft_exit(NULL, my_env);
-	if (!ft_str_is_space(input))
+	if (!ft_str_is_space(input) && input[0] != ':'
+		&& input[0] != '!')
 	{
 		add_history(input);
 		tokens = tokenize_input_mem(input);

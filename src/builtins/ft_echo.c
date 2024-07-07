@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:16:56 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/03 22:46:25 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/05 13:11:49 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,31 @@ int	is_no_line(char *s)
 	return (1);
 }
 
+void	print_char_by_char(char **input, int with_space, int i)
+{
+	int	j;
+
+	j = 0;
+	if (with_space)
+		ft_printf(" ");
+	while (input[i][j])
+	{
+		if (input[i][j] == '\\')
+		{
+			if (input[i][j + 1] == '\\')
+			{
+				ft_printf("%c", '\\');
+				j++;
+			}
+		}
+		else
+		{
+			ft_printf("%c", input[i][j]);
+		}
+		j++;
+	}
+}
+
 void	ft_echo(char **input)
 {
 	int		i;
@@ -43,12 +68,12 @@ void	ft_echo(char **input)
 	{
 		if (first_print)
 		{
-			ft_putstr(input[i]);
+			print_char_by_char(input, 0, i);
 			first_print = 0;
 		}
 		else
-			ft_printf(" %s", input[i]);	
-		i++;		
+			print_char_by_char(input, 1, i);
+		i++;
 	}
 	if (newl == 1)
 		ft_putstr("\n");

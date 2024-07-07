@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moassi <moassi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:04:38 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/02 20:01:19 by hkanaan          ###   ########.fr       */
+/*   Updated: 2024/07/05 10:57:50 by moassi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@ static void	update_env(char *var, char *value, t_env *myenv, int index)
 int	add_or_update_to_env(char *var, char *value, t_env *myenv)
 {
 	int	i;
+	int	l;
 
 	i = 0;
 	if (ft_strcmp(var, "?=") && !check_var_validity(var, value))
 		return (1);
+	l = ft_strlen(var);
 	while ((myenv->env)[i])
 	{
-		if (!strncmp(var, (myenv->env)[i], ft_strlen(var)))
+		if (!strncmp(var, (myenv->env)[i], ft_strlen(var))
+			|| (!strncmp(var, (myenv->env)[i], l - 1) && !myenv->env[i][l - 1]))
 		{
 			update_env(var, value, myenv, i);
 			free(value);
@@ -93,7 +96,6 @@ static int	extract_var_and_val(char *str, t_env *myenv)
 		value = ft_substr(value, 1, ft_strlen(value) - 2);
 		free(tmp);
 	}
-	i = 0;
 	return (add_or_update_to_env(var, value, myenv));
 }
 
@@ -105,7 +107,8 @@ int	ft_export(char **input, t_env *myenv)
 	exit_code = 0;
 	if (!input[1])
 	{
-		return (1);
+		sort_print_env(myenv);
+		return (0);
 	}
 	i = 1;
 	while (input[i])
@@ -114,6 +117,8 @@ int	ft_export(char **input, t_env *myenv)
 		{
 			if (!check_var_validity(input[i], ""))
 				exit_code = 1;
+			else if (!var_exists(input[i], myenv))
+				add_env(ft_strdup(input[i]), ft_strdup(""), myenv);
 			i++;
 			continue ;
 		}

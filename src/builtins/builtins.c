@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:06:51 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/03 23:16:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/07 20:57:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	do_builtin_cmd(char **input, t_env *myenv)
 		return (1);
 	}
 	else if (!ft_strcmp("pwd", input[0]))
-		return (ft_pwd());
+		return (ft_pwd(myenv));
 	else if (!ft_strcmp("env", input[0]))
 		return (ft_env(input, myenv));
 	return (0);

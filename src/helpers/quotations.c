@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 22:24:31 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/04 12:45:43 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/05 12:14:01 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	resolve_quotes(t_ll_node **lst, char *str, int *j, t_env *myenv)
 			(*j)++;
 		}
 	}
+	(*j)++;
 }
 
 void	resolve_literals(t_ll_node **lst, char *str, int *j, t_env *myenv)
@@ -40,6 +41,7 @@ void	resolve_literals(t_ll_node **lst, char *str, int *j, t_env *myenv)
 		add_to_str(str[*j], lst);
 		(*j)++;
 	}
+	(*j)++;
 }
 
 /*
@@ -89,19 +91,17 @@ void	clean_quotations(t_ast_node *head, int i, t_env *my_env)
 		return ;
 	while (head->value[i][j])
 	{
-		if (head->value[i][j] == '$')
-		{
-			search_and_add_var(&start, head->value[i], &j, my_env);
-		}
-		else if (head->value[i][j] == '"')
+		if (head->value[i][j] == '"')
 			resolve_quotes(&start, head->value[i], &j, my_env);
 		else if (head->value[i][j] == '\'')
 			resolve_literals(&start, head->value[i], &j, my_env);
-		else
-		{
-			add_to_str(head->value[i][j], &start);
+		else if (head->value[i][j] == '$' && ((head->value[i][j + 1] == '"')
+				|| (head->value[i][j + 1] == '\'')))
 			j++;
-		}
+		else if (head->value[i][j] == '$')
+			search_and_add_var(&start, head->value[i], &j, my_env);
+		else
+			add_to_str(head->value[i][j++], &start);
 	}
 	(replace_cleaned_str(&start, head, i), free_char_ll(&start));
 }

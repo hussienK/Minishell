@@ -6,7 +6,7 @@
 /*   By: moassi <moassi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:05:13 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/02 14:06:39 by moassi           ###   ########.fr       */
+/*   Updated: 2024/07/05 10:58:29 by moassi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	check_var_validity(char *var, char *value)
 
 	set = "*/~-!@#&^()";
 	i = 0;
-	if (!(var[i] >= 'a' && var[i] <= 'z') && !(var[i] >= 'A' && var[i] <= 'Z'))
+	if (!(var[i] >= 'a' && var[i] <= 'z') && !(var[i] >= 'A' && var[i] <= 'Z')
+		&& var[i] != '_')
 	{
 		print_export_error(var, value);
 		return (0);
@@ -42,4 +43,24 @@ int	check_var_validity(char *var, char *value)
 		i++;
 	}
 	return (1);
+}
+
+int	var_exists(char	*str, t_env *myenv)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_strjoin(str, "=");
+	while (myenv->env[i])
+	{
+		if (!ft_strncmp(tmp, myenv->env[i], ft_strlen(tmp)))
+		{
+			free(tmp);
+			return (1);
+		}
+		i++;
+	}
+	free(tmp);
+	return (0);
 }
