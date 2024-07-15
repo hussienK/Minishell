@@ -6,7 +6,7 @@
 /*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:19:06 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/02 20:01:19 by hkanaan          ###   ########.fr       */
+/*   Updated: 2024/07/08 11:09:37 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,31 @@ static void	update_env(t_env *myenv, int remove_index)
 	myenv->env = new_env;
 }
 
-static void	check_and_delete_var(t_env *myenv, char *arg, int *invalid)
+static int	check_valid(char *arg, int *invalid, int *exit_code)
+{
+	if (ft_strchr(arg, '!') && arg[1] && *invalid == 0)
+	{
+		ft_printf("unset: %s: event not found\n", arg);
+		(*invalid)++;
+		return (0);
+	}
+	else if (ft_strchr(arg, '(') || ft_strchr(arg, ')'))
+	{
+		ft_printf("unset: %s: syntax error near unexpected token\n", arg);
+		(*invalid)++;
+		*exit_code = 2;
+		return (0);
+	}
+	return (1);
+}
+
+static void	check_and_delete_var(t_env *myenv, char *arg, int *invalid, int *ex)
 {
 	char	*trgt;
 	int		i;
 
-	if (strchr(arg, '='))
-	{
-		if (*invalid == 0)
-		{
-			ft_printf("unset: %s: invalid parameter name\n", arg);
-			(*invalid)++;
-		}
+	if (!check_valid(arg, invalid, ex))
 		return ;
-	}
 	trgt = ft_strjoin(arg, "=");
 	i = 0;
 	while (myenv->env[i])
@@ -72,17 +83,17 @@ int	ft_unset(char **input, t_env *myenv)
 {
 	int		i;
 	int		invalid;
+	int		exit_code;
 
+	exit_code = 0;
 	if (!input[1])
-	{
-		return (0);
-	}
+		return (exit_code);
 	invalid = 0;
 	i = 1;
 	while (input[i])
 	{
-		check_and_delete_var(myenv, input[i], &invalid);
+		check_and_delete_var(myenv, input[i], &invalid, &exit_code);
 		i++;
 	}
-	return (0);
+	return (exit_code);
 }

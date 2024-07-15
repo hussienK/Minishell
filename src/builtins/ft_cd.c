@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:50:13 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/07 21:30:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 11:00:00 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void	update_current_pwd(t_env *myenv, int add_dots)
 
 	i = -1;
 	update_old_pwd(myenv);
+	buf[0] = '\0';
 	while (myenv->env[++i])
 	{
 		if (!ft_strncmp(myenv->env[i], "PWD=", 4))
 		{
 			getcwd(buf, sizeof(buf));
-			if (buf[0] == '\0')
-				return ;
-			dir = ft_strdup(buf);
-			if (add_dots && !strcmp(myenv->env[i] + 4, dir))
-				dir = ft_strjoin(myenv->env[i] + 4, ft_strdup("/.."));
+			if (add_dots && buf[0] == '\0')
+				dir = ft_strjoin(myenv->env[i] + 4, "/..");
+			else
+				dir = ft_strdup(buf);
 			add_or_update_to_env(ft_strdup("PWD="), dir, myenv);
 			break ;
 		}

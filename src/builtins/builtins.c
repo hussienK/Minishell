@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:06:51 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/07 20:57:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 10:54:23 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	do_builtin_cmd(char **input, t_env *myenv)
 int	do_builtin_cmd_parent(char **input, t_env *myenv)
 {
 	if (!ft_strcmp("exit", input[0]))
-		return(ft_exit(input, myenv));
+		return (ft_exit(input, myenv));
 	else if (!ft_strcmp("export", input[0]))
 		return (ft_export(input, myenv));
 	else if (!ft_strcmp("unset", input[0]))

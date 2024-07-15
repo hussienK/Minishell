@@ -85,7 +85,6 @@ void	get_var_heredoc(char *str, t_env *myenv, int *j, int out_f)
 	char	*to_find;
 	char	*tmp;
 
-
 	(void)myenv;
 	(void)out_f;
 	(*j)++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:45:13 by hkanaan           #+#    #+#             */
-/*   Updated: 2024/07/07 21:23:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 10:58:01 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ int			here_doc(char *delim, t_execution_organiser *org, t_env *my_env);
 
 int			do_builtin_cmd(char **input, t_env *myenv);
 int			ft_cd(char **input, t_env *my_env);
-int 		cd_back(t_env *myenv);
-void	cd_error_display(char *dir);
+int			cd_back(t_env *myenv);
+void		cd_error_display(char *dir);
 void		update_current_pwd(t_env *myenv, int add_dots);
 void		ft_echo(char **input);
 void		ft_free_env(t_env **myenv);

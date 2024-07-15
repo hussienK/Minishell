@@ -35,10 +35,9 @@ int	cd_back(t_env *myenv)
 	if (chdir(dir) == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
-		ft_putendl_fd(myenv->env[i], 2);
-		return (free(dir), 1);
+		return (ft_putendl_fd(myenv->env[i], 2), free(dir), 1);
 	}
-	free(dir), update_current_pwd(myenv, 0);
+	(free(dir), update_current_pwd(myenv, 0));
 	return (0);
 }
 

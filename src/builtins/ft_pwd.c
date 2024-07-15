@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkanaan <hkanaan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:37:32 by moassi            #+#    #+#             */
-/*   Updated: 2024/07/07 21:31:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 10:57:37 by hkanaan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	get_old(t_env *myenv)
 	{
 		if (!ft_strncmp("PWD=", myenv->env[i], 4))
 		{
-			p =  myenv->env[i] + 4;
+			p = myenv->env[i] + 4;
 			ft_printf("%s\n", p);
-			break;
+			break ;
 		}
 	}
 }
