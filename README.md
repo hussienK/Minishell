@@ -4,8 +4,8 @@ Welcome to the Minishell project, part of the curriculum at School 42. This proj
 
 ## Team
 
-- **Lexing, Parsing, and Execution:** [Your Name]
-- **Builtin Commands:** [Teammate's Name]
+- **Lexing, Parsing, and Execution:** Hussien Kanaan
+- **Builtin Commands:** Mohammad Assi
 
 ## Overview
 
@@ -37,7 +37,7 @@ To build and run the Minishell, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/minishell.git
+   git clone https://github.com/hussienK/minishell.git
    cd minishell
 2. Build the project:
    ```sh
